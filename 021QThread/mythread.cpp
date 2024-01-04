@@ -5,26 +5,27 @@
 MyThread::MyThread(QObject *parent)
     : QThread{parent}
 {
-    m_iCount = 0;
+    m_bThreadStop = false;
 }
 
-int MyThread::GetCount()
+void MyThread::stop()
 {
-    m_mutex.lock();
-    int iRes = m_iCount;
-    m_mutex.unlock();
-    return iRes;
+    m_bThreadStop = true;
 }
 
 void MyThread::run()
 {
-    for (int i = 0 ; i < 10 ; i++)
+    m_bThreadStop = false;
+    int count = 0;
+
+    while (!m_bThreadStop)
     {
         m_mutex.lock();
 
-        m_iCount++;
+        count++;
         msleep(500);
-        qDebug() << "count: " << m_iCount;
+        emit signal_count(count);
+
         m_mutex.unlock();
 
         msleep(500);

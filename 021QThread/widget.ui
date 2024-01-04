@@ -17,18 +17,32 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QPushButton" name="pbtStart">
-       <property name="text">
-        <string>start</string>
-       </property>
-      </widget>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QPushButton" name="pbtStart">
+         <property name="text">
+          <string>start</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pbtStop">
+         <property name="text">
+          <string>stop</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pbtIsRunnig">
+         <property name="text">
+          <string>is running</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item>
-      <widget class="QPushButton" name="pbtGet">
-       <property name="text">
-        <string>Get</string>
-       </property>
-      </widget>
+      <widget class="QTextEdit" name="textEdit"/>
      </item>
     </layout>
    </item>

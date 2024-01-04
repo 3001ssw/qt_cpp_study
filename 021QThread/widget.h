@@ -24,7 +24,10 @@ protected:
 
 private slots:
     void slot_start();
-    void slot_get();
+    void slot_stop();
+    void slot_isrunning();
+
+    void slot_count(int count);
 
     void slot_started();
     void slot_finished();

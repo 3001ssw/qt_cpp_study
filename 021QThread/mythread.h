@@ -11,13 +11,18 @@ public:
     explicit MyThread(QObject *parent = nullptr);
 
 protected:
-    int m_iCount;
+    bool m_bThreadStop;
     QMutex m_mutex;
+
 public:
-    int GetCount();
+    void stop();
+
+signals:
+    void signal_count(int count);
 
 private:
     virtual void run();
+
 };
 
 #endif // MYTHREAD_H
