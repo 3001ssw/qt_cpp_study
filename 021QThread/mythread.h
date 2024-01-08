@@ -13,16 +13,17 @@ public:
 protected:
     bool m_bThreadStop;
     QMutex m_mutex;
+    int m_count;
 
 public:
     void stop();
-
-signals:
-    void signal_count(int count);
+    void setCountPlus();
 
 private:
     virtual void run();
 
+signals:
+    void signal_message(QString msg);
 };
 
 #endif // MYTHREAD_H

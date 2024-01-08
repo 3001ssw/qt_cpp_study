@@ -10,13 +10,14 @@ Widget::Widget(QWidget *parent)
 
     m_mythread = new MyThread();
 
-    connect(ui->pbtStart, &QPushButton::clicked, this, &Widget::slot_start);
-    connect(ui->pbtStop, &QPushButton::clicked, this, &Widget::slot_stop);
-    connect(ui->pbtIsRunnig, &QPushButton::clicked, this, &Widget::slot_isrunning);
+    // 버튼 활성/비활성화
+    EnableButton();
 
-    connect(m_mythread, &MyThread::signal_count, this, &Widget::slot_count);
-    connect(m_mythread, &MyThread::started, this, &Widget::slot_started);
-    connect(m_mythread, &MyThread::finished, this, &Widget::slot_finished);
+    connect(ui->pbtStart, &QPushButton::clicked, this, &Widget::slot_startButtonClicked);
+    connect(ui->pbtStop, &QPushButton::clicked, this, &Widget::slot_stopButtonClicked);
+    connect(ui->pbtSetPlus, &QPushButton::clicked, this, &Widget::slot_setPlusButtonClicked);
+
+    connect(m_mythread, &MyThread::signal_message, this, &Widget::slot_getMsgFromThread);
 }
 
 Widget::~Widget()
@@ -24,38 +25,39 @@ Widget::~Widget()
     delete ui;
 }
 
-void Widget::slot_start()
+void Widget::EnableButton()
+{
+    if (m_mythread->isRunning())
+    {
+        ui->pbtStart->setEnabled(false);
+        ui->pbtStop->setEnabled(true);
+    }
+    else
+    {
+        ui->pbtStart->setEnabled(true);
+        ui->pbtStop->setEnabled(false);
+    }
+}
+
+void Widget::slot_startButtonClicked()
 {
     m_mythread->start();
+    EnableButton();
 }
 
-void Widget::slot_stop()
+void Widget::slot_stopButtonClicked()
 {
     m_mythread->stop();
+    m_mythread->wait();
+    EnableButton();
 }
 
-void Widget::slot_isrunning()
+void Widget::slot_setPlusButtonClicked()
 {
-    bool bRunning = m_mythread->isRunning();
-    QString msg = QString("is running: %1").arg(bRunning);
+    m_mythread->setCountPlus();
+}
+
+void Widget::slot_getMsgFromThread(QString msg)
+{
     ui->textEdit->append(msg);
 }
-
-void Widget::slot_count(int count)
-{
-    QString msg = QString("count: %1").arg(count);
-    ui->textEdit->append(msg);
-}
-
-void Widget::slot_started()
-{
-    qDebug() << Q_FUNC_INFO;
-    ui->textEdit->append("thread started");
-}
-
-void Widget::slot_finished()
-{
-    qDebug() << Q_FUNC_INFO;
-    ui->textEdit->append("thread finished");
-}
-

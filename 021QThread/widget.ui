@@ -33,9 +33,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pbtIsRunnig">
+        <widget class="QPushButton" name="pbtSetPlus">
          <property name="text">
-          <string>is running</string>
+          <string>set plus</string>
          </property>
         </widget>
        </item>
