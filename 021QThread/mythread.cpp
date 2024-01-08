@@ -15,14 +15,14 @@ void MyThread::stop()
 
 void MyThread::setCountPlus()
 {
-    // m_mutex.lock();
+     m_mutex.lock();
 
     int iOld = m_count;
     m_count++; // 1 증가
     QString msg = QString("값 증가: %1 -> %2").arg(iOld).arg(m_count);
     emit signal_message(msg);
 
-    // m_mutex.unlock();
+     m_mutex.unlock();
 }
 
 void MyThread::run()
@@ -32,7 +32,7 @@ void MyThread::run()
 
     while (!m_bThreadStop)
     {
-        // m_mutex.lock();
+        m_mutex.lock();
 
         // 시작 값
         int iStart = m_count;
@@ -55,7 +55,7 @@ void MyThread::run()
         // 작업 다 끝나면 1 증가
         m_count++;
 
-        // m_mutex.unlock();
+        m_mutex.unlock();
 
         msleep(1000); // 쓰레드 주기 1000msec
     }
