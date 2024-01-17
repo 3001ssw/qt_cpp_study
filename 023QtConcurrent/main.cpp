@@ -3,19 +3,23 @@
 #include <QtConcurrent>
 #include <QDebug>
 
-int sum(int iX, int iY)
+void print_for_loop(int iLoopCnt)
 {
-    int iSum = iX + iY;
-
-    qDebug("%d + %d = %d", iX, iY, iSum);
-
-    return iSum;
+    for (int iIndex = 0 ; iIndex < iLoopCnt ; iIndex++)
+    {
+        qDebug("print: %d", iIndex);
+        QThread::sleep(1);
+    }
 }
+
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    QFuture<int> f1 = QtConcurrent::run(sum, 1, 2);
-    f1.waitForFinished();
+    QFuture<void> func = QtConcurrent::run(print_for_loop, 10);
+
+    qDebug("main thread wait befor function finished");
+    func.waitForFinished();
+    qDebug("finished");
 
     return a.exec();
 }
