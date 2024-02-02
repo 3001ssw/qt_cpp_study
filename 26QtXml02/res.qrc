@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>read_sample.xml</file>
+    </qresource>
+</RCC>

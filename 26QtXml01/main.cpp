@@ -5,12 +5,6 @@
  * DOM 방식에 비해 속도가 빠르고 메모리를 덜 차지함
  */
 
-// DOM(Document Object Model)
-/*
- * QDomNodeList, QDomNode, QDomElement
- * DOM은 XML을 메모리에 모두 올려서 사용함
- */
-
 #include <QCoreApplication>
 
 #include <QFile>
