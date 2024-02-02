@@ -1,0 +1,6 @@
+<?xml가 version="1.0" encoding="utf-8"?>
+<tag>
+	<tag_type1 name="일">1</tag_type1>
+	<tag_type1 name="이">2</tag_type1>
+	<tag_type2 name="삼">3</tag_type2>
+</tag>
