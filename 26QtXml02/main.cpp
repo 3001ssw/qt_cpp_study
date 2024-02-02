@@ -40,7 +40,8 @@ int main(int argc, char *argv[])
         if (node.isElement())
         {
             QDomElement element = node.toElement();
-            qDebug() << "name: " << element.attribute("name");
+            QString text = element.text();
+            qDebug() << "name: " << element.attribute("name") << ", text: " << text;
         }
     }
 
