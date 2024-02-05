@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/trans">
+        <file>korean.qm</file>
+    </qresource>
+</RCC>
