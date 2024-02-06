@@ -1,0 +1,46 @@
+- 라이브러리 방식
+shared 방식(.so 파일)
+라이브러리 파일을 같이 배포
+
+static 방식(.a 파일)
+실행파일에 합쳐져서 실행파일만 배포(실행파일 크기가 shared 방식보다 더 커짐)
+
+- .pro
+Qt Pro에
+TEMPLATE = lib
+를 해주면 라이브러리 프로젝트(기본값은 app)
+
+app: 어플리케이션
+lib: 라이브러리
+subdir: 프로젝트 폴더 안에 하위 프로젝트가 있을때
+vcapp: 비주얼스튜디오 프로젝트를 컴파일할때 사용
+vclib: 비주얼스튜디오 프로젝트 라이브러리를 생성할때 사용
+aux: Qt installer 만들 때(설치 배포)
+
+- 외부라이브러리 참조하기 위해서는 ICNLUDE와 LIBS 키워드를 사용
+.pro에
+TEMPLATE = app
+TARGET = 
+DEPENDPATH += ../testLib
+INCLUDEPATH += ../testLib
+LIBS += -L../testLib/debug -ltestLib
+
+DEPENDPATH와 INCLUDEPATH 에는 헤더파일 위치
+-L: .so 파일이 있는 디렉토리
+-ㅣ: 라이브러리
+
+- 플랫폼별 라이브러리 다르게 적용
+win32:CONFIG (release, debug|release): {LIBS += -L$$PWD/build-MyLibrary/ -lmylibrary}
+else:win32:CONFIG (debug, debug|release): {LIBS += -L$$PWD/build-MyLibrary/ -lmylibrary}
+
+else:unix: LIBS += -L$$PWD/build-MyLibrary/ -lmylibrary
+
+INCLUDEPATH += $$PWD/build-MyLibrary/
+DEPENDPATH += $$PWD/build-MyLibrary/
+
+$$PWD: 현재 프로젝트 경로
+
+- 프로젝트 생성
+[Create Project] - [C++ Library] - [shared library, core 선택]
+
+- 
