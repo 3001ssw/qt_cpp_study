@@ -21,7 +21,8 @@ FORMS += \
 INCLUDEPATH += $$PWD/../MyLibrary
 DEPENDPATH += $$PWD/../MyLibrary
 
-LIBS += -L$$PWD/../build-MyLibrary-Desktop_Qt_6_5_3_MinGW_64_bit-Debug\debug -lMyLibrary
+#LIBS += -L$$PWD/../build-MyLibrary-Desktop_Qt_6_5_3_MinGW_64_bit-Debug\debug -lMyLibrary
+LIBS += -L$$PWD/../../build-MyProject-Desktop_Qt_6_5_3_MinGW_64_bit-Debug\MyLibrary\debug -lMyLibrary
 
 message("INCLUDEPATH -> " + $$INCLUDEPATH)
 message("LIBS -> " + $$LIBS)

@@ -40,7 +40,16 @@ DEPENDPATH += $$PWD/build-MyLibrary/
 
 $$PWD: 현재 프로젝트 경로
 
-- 프로젝트 생성
+- library 프로젝트 생성
 [Create Project] - [C++ Library] - [shared library, core 선택]
 
-- 
+- 통합 프로젝트 만들기
+MyProject.pro를 메모장으로 하나 만들고 아래처럼 입력
+
+TEMPLATE = subdirs
+SUBDIRS += MyLibrary
+SUBDIRS += MyWidget			
+MyLibrary.file = MyLibrary/MyLibrary.pro
+MyWidget.file = MyWidget/MyWidget.pro
+
+그 다음 빌드해보면 에러가 생기는데 MyWidget.pro에 LIBS 경로 다시 설정해줘야함
