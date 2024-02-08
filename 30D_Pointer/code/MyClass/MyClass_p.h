@@ -12,7 +12,7 @@ public:
 
 private:
     int m_value;
-    MyClass *q_ptr;
+    MyClass *q_ptr; // q_ptr로 해야함
 
     void setValue(int value);
     int getValue();

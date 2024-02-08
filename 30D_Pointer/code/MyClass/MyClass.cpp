@@ -4,7 +4,7 @@
 
 MyClass::MyClass()
 {
-    d_ptr = new MyClassPrivate(this);
+    d_ptr = new MyClassPrivate(this); // private class 생성
 
 }
 
@@ -17,7 +17,7 @@ void MyClass::setValue(int value)
 {
     m_value = value;
 
-    Q_D(MyClass);
+    Q_D(MyClass); // d 사용 전 Q_D 해야 함
     d->setValue(value * 10);
 }
 
@@ -28,6 +28,6 @@ int MyClass::getValue()
 
 void MyClass::printValueAll()
 {
-    Q_D(MyClass);
+    Q_D(MyClass); // d 사용 전 Q_D 해야 함
     d->printValue();
 }

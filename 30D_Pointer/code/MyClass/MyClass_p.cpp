@@ -3,7 +3,7 @@
 
 MyClassPrivate::MyClassPrivate(MyClass* q)
 {
-    q_ptr = q;
+    q_ptr = q; // 인자로 받아야함
 }
 
 MyClassPrivate::~MyClassPrivate()
@@ -23,7 +23,7 @@ int MyClassPrivate::getValue()
 
 void MyClassPrivate::printValue()
 {
-    Q_Q(MyClass);
+    Q_Q(MyClass); // q 사용 전 Q_Q 호출
     qDebug() << "MyClass::printValue: " << q->getValue();
     qDebug() << "MyClassPrivate::printValue: " << m_value;
 }
