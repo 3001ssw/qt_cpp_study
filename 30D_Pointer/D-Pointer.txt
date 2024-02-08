@@ -1,0 +1,16 @@
+D-Pointer
+- 사용 목적
+1. 버전 호환성
+ex) MyLibrary 클래스의 멤버함수가 printCurrentValue() 라는 함수가 v1에는 구현되어 있는데 v2부터는 deprecated되었을 때
+
+2. 소스 코드 비밀 유지
+ex) 특정 통신 작업에서 struct와 define, 그리고 class 구조를 보여주고 싶지 않을 때
+
+- Private 클래스 사용
+MyClass(myclass.h) 클래스를 배포용 헤더파일이라고 할 때 비밀유지를 할 클래스는 MyClassPrivate(myclass_p.h)를 만들어줌
+규칙은 기존 클래스 이름 뒤에 'Private(P대문자)'를 붙여주고, 파일 이름 뒤에는 '_p'를 붙여줌
+
+- Q_D, Q_Q 예제
+MyClass에서 MyClassPrivate 등록할 때 d_ptr = new MyClassPrivate(this); 사용
+MyClass에서 MyClassPrivate 멤버함수 호출할 때 Q_D(MyClass) 호출 후 d_ptr->memberFunction(); 사용
+MyClassPrivate에서 MyClass 멤버함수 호출할 때 Q_Q(MyClass) 호출 후 q_ptr->memberFunction(); 사용

@@ -18,9 +18,8 @@ vclib: 비주얼스튜디오 프로젝트 라이브러리를 생성할때 사용
 aux: Qt installer 만들 때(설치 배포)
 
 - 외부라이브러리 참조하기 위해서는 ICNLUDE와 LIBS 키워드를 사용
-.pro에
-TEMPLATE = app
-TARGET = 
+console 또는 widget 프로젝트 생성 후 .pro에
+
 DEPENDPATH += ../testLib
 INCLUDEPATH += ../testLib
 LIBS += -L../testLib/debug -ltestLib
