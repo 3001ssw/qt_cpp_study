@@ -1,0 +1,20 @@
+- 설치 전 할 일 1
+설치 시 Android 패키지 설치해야함
+설치 안했으면 Qt 설치 경로(C:\Qt)에 MaintenanceTool.exe 실행 후 Android 패키지 추가
+
+- 설치 전 할 일 2
+Android 개발 하기 전 JDK 설치 필요
+
+- Qt Creator 설정
+Tools - Options - Devices - Android
+Qt Creator 11.0.3 에서는 Edit - Preference - Device - Android
+
+Android JDK 경로 설정해주고, Set Up SDK 클릭, OpenSSL은 굳이 할 필욘 없음
+
+SDK Manager에서 안드로이드 버전 선택 후 SDK Platform설치
+
+- 연결 확인
+[명령 프롬프트] - [SDK 설치 경로\platform-toos]에서 "adb.exe devices" 입력
+
+- 프로젝트 생성
+Qt Creator에서 Analog Clock 사용
