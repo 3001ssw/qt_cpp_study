@@ -5,9 +5,7 @@
 #include <QtNetwork>
 
 QT_BEGIN_NAMESPACE
-namespace Ui {
-class Widget;
-}
+namespace Ui { class Widget; }
 QT_END_NAMESPACE
 
 class Widget : public QWidget
@@ -21,14 +19,15 @@ public:
 private:
     Ui::Widget *ui;
 
-    QTcpServer *m_pTcpServer;
+private:
+    QTcpSocket *m_pSocket;
 
-protected:
-    void initailizeWidget();
+    void initalizeWidget();
 
 private slots:
-    void slot_newConnect();
-    void slot_disconnectClient();
-
+    void slot_connectServer();
+    void slot_DisconnectServer();
+    void slot_readMessage();
+    void slot_disconnected();
 };
 #endif // WIDGET_H

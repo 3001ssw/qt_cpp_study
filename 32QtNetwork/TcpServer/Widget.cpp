@@ -58,15 +58,35 @@ void Widget::initailizeWidget()
 void Widget::slot_newConnect()
 {
     QTcpSocket *pClient = m_pTcpServer->nextPendingConnection(); // 접속한 클라이언트의 정보 저장
-    connect(pClient, &QTcpSocket::disconnected, &Widget::deleteLater); // 클라이언트가 disconnect되면 나중에 메모리에서 소멸
+    connect(pClient, &QTcpSocket::disconnected, pClient, &Widget::deleteLater); // 클라이언트가 disconnect되면 나중에 메모리에서 소멸
+    connect(pClient, &QTcpSocket::disconnected, this, &Widget::slot_disconnectClient); // 클라이언트가 disconnect되면 나중에 메모리에서 소멸
 
     QString strTime = QTime::currentTime().toString("hh:mm:ss");
-    QString strMsg = QString("클라이언트 접속(%1)").arg(strTime);
+    QHostAddress peerAddress = pClient->peerAddress();
+    quint16 unPeerPort = pClient->peerPort();
+    QString strMsg = QString("%1: 클라이언트(%2:%3) 접속")
+                         .arg(strTime)
+                         .arg(peerAddress.toString())
+                         .arg(unPeerPort);
 
     ui->edMsg->append(strMsg);
 
     // client로 메시지 전달
     QByteArray message = QByteArray("complet connect server");
     pClient->write(message);
-    // pClient->disconnectFromHost(); // 종료
+    //    pClient->disconnectFromHost(); // 종료
+}
+
+void Widget::slot_disconnectClient()
+{
+    QTcpSocket *pClient = static_cast<QTcpSocket*>(sender());
+
+    QString strTime = QTime::currentTime().toString("hh:mm:ss");
+    QHostAddress peerAddress = pClient->peerAddress();
+    quint16 unPeerPort = pClient->peerPort();
+    QString strMsg = QString("%1: 클라이언트(%2:%3) 접속해제")
+                         .arg(strTime)
+                         .arg(peerAddress.toString())
+                         .arg(unPeerPort);
+    ui->edMsg->append(strMsg);
 }
