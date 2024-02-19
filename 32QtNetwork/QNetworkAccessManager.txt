@@ -1,0 +1,19 @@
+
+
+
+- QNetworkAccessManager로 다양한 서비스 구현
+웹 브라우저가 특정 웹사이트 접속할 때 주소만 입력 - QNetworkRequest
+특정 사이트를 접속하고 난 뒤 여러 이미지와 동영상이 표시됨 - QNetworkReply
+
+- 예제
+QNetworkAccessManager* pManager = new QNetworkAccessManager(this);
+connect(manager, &QNetworkAccessMAnager::finished, this, &MyClas::replyFinished);
+
+QNetworkRequest req;
+req.setUrl(QUrl("hiit://qt-dev.com"));
+req.setRawHEader("User-Agent", "MyBrowser 1.0");
+
+QNetworkReply rep = pManager->get(req);
+connect(rep, &QIODevice::readyRead, this, &MyClass::slot_readyRead);
+connect(rep, &QIODevice::errorOccurred, this, &MyClass::slot_errorOccurred);
+connect(rep, &QIODevice::sslErrors, this, &MyClass::slot_sslERrors);

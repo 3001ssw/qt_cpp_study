@@ -1,0 +1,77 @@
+- QUdpSocket 예제
+
+void MyClass::initSocket()
+{
+	QUdpSocket* pUdp = new QUdpSocket(this);
+	pUdp->bind(QHostAddress::LocalHost, pUdp->localPort());
+
+	connect(pUdp, &QUdpSocket::readyRead, this, &MyClass::slot_readyRead);
+}
+
+void MyClass:: slot_readyRead()
+{
+	while (pUdp->hasPendingDatagrams())
+	{
+		QNetworkDatagram datagram = pUdp->receiveDatagram();
+		QByteArray bytes = datagram->data();
+		// todo something
+	}
+}
+
+
+- unicast, boradcast, multicast
+
+- broadcast 전송 방법
+QByteArray data(~~~)
+writeDatagram(data, QHostAddress::Broadcast, 8888)
+
+- multicast
+
+// send
+QUdpSocket* pUdp1 = new QUdpSocket(this);
+QUdpSocket* pUdp2 = new QUdpSocket(this);
+
+QHostAddress hostAddress1 = QHostAddress("192.168.100.10"); // IPv4
+QHostAddress hostAddress2 = QHostAddress("1234::ABCD"); // IPv6
+
+pUdp1->bind(QHostAddress(AnyIPv4), pUdp1->localPort());
+pUdp2->bind(QHostAddress(AnyIPv6), pUdp2->localPort());
+
+pUdp1->writeDatagram(data, hostAddress1, 8888);
+
+if (pUdp2->state() == QAbstractSocket::BoundState)
+	pUdp2->writeDatagram(data, hostAddress2, 8888);
+
+
+// receive
+QHostAddress hostAddress1 = QHostAddress("192.168.100.5");
+QHostAddress hostAddress2 = QHostAddress("192.168.100.5");
+
+pUdp1->bind(QHostAddress(AnyIPv4), 8888, QUdpSocket::ShareAddress);
+pUdp->joinMulticastGroup(hostAddress1);
+
+pUdp2->bind(QHostAddress(AnyIPv6), 8888, QUdpSocket::ShareAddress);
+pUdp-2joinMulticastGroup(hostAddress2);
+
+
+void MyClass:: slot_readyRead()
+{
+	// IPv4
+	while (pUdp->hasPendingDatagrams())
+	{
+		QNetworkDatagram datagram;
+		datagram.resize(int(pUdp1->receiveDatagramSize()));
+		QByteArray data;
+		pUdp1->readDatagram(datagram.data(), datagram.size());
+		// todo something
+	}
+	// IPv6
+	while (pUdp->hasPendingDatagrams())
+	{
+		QNetworkDatagram datagram = pUdp2->receiveDatagram();
+		QByteArray bytes = datagram->data();
+		// todo something
+	}
+}
+
+while
