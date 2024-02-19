@@ -1,3 +1,6 @@
 다운로드 링크: https://download.qt.io/official_releases/qt-installer-framework/
 
 "https://download.qt.io/official_releases/qt-installer-framework/4.7.0/" 에서 QtInstallerFramework-windows-x64-4.7.0.exe 설치
+
+복잡한 설치파일은 C:\Qt\QtIFW-4.7.0\examples 참고
+C:\Qt\QtIFW-4.7.0\bin에서 binarycreator.exe 사용 예정
