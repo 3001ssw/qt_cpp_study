@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>Example software</Name>
+    <Version>1.0.0</Version>
+    <Title>Title</Title>
+    <Publisher>3001ssw</Publisher>
+    <StartMenuDir>Start Menu shorcut</StartMenuDir>
+    <TargetDir>C:/Example_Software</TargetDir>
+</Installer>
