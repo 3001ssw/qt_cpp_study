@@ -100,3 +100,9 @@ C:\Qt\6.5.3
 예를들어 MinGW로 빌드하면
 C:\Qt\6.5.3\mingw_64\bin 에서 dll 찾아쓰면 됨
 C:\Qt\6.5.3\mingw_64\plugins\platforms폴더 내의 dll 파일도 필요
+libgcc_s_seh-1.dll
+libstdc++-6.dll
+libwinpthread-1.dll
+Qt6Core.dll
+Qt6Gui.dll
+Qt6Widgets.dll
